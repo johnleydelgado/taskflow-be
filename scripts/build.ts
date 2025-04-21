@@ -1,22 +1,23 @@
+// scripts/build.ts
 import fs from 'fs-extra';
 import logger from 'jet-logger';
 import childProcess from 'child_process';
 
-
-/**
- * Start
- */
 (async () => {
   try {
-    // Remove current build
+    // 1) Clean out old build directory
     await remove('./dist/');
-    await exec('tsc --build tsconfig.prod.json', './');
-    // Copy
+
+    // 2) Compile TS → dist/
+    await exec('tsc --build tsconfig.prod.json');
+
+    // 3) Copy static assets into dist/
     await copy('./src/public', './dist/public');
     await copy('./src/views', './dist/views');
-    await copy('./temp/config.js', './config.js');
-    await copy('./temp/src', './dist');
-    await remove('./temp/');
+
+    // 4) Copy compiled config.js from dist → project root
+    await copy('./dist/config.js', './config.js');
+
   } catch (err) {
     logger.err(err);
     // eslint-disable-next-line n/no-process-exit
@@ -24,41 +25,20 @@ import childProcess from 'child_process';
   }
 })();
 
-/**
- * Remove file
- */
-function remove(loc: string): Promise<void> {
-  return new Promise((res, rej) => {
-    return fs.remove(loc, err => {
-      return (!!err ? rej(err) : res());
-    });
-  });
+function remove(path: string): Promise<void> {
+  return fs.remove(path);
 }
 
-/**
- * Copy file.
- */
 function copy(src: string, dest: string): Promise<void> {
-  return new Promise((res, rej) => {
-    return fs.copy(src, dest, err => {
-      return (!!err ? rej(err) : res());
-    });
-  });
+  return fs.copy(src, dest);
 }
 
-/**
- * Do command line command.
- */
-function exec(cmd: string, loc: string): Promise<void> {
-  return new Promise((res, rej) => {
-    return childProcess.exec(cmd, {cwd: loc}, (err, stdout, stderr) => {
-      if (!!stdout) {
-        logger.info(stdout);
-      }
-      if (!!stderr) {
-        logger.warn(stderr);
-      }
-      return (!!err ? rej(err) : res());
+function exec(cmd: string, cwd: string = process.cwd()): Promise<void> {
+  return new Promise((resolve, reject) => {
+    childProcess.exec(cmd, { cwd }, (err, stdout, stderr) => {
+      if (stdout) logger.info(stdout.trim());
+      if (stderr) logger.warn(stderr.trim());
+      return err ? reject(err) : resolve();
     });
   });
 }

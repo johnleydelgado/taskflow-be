@@ -5,7 +5,7 @@
     "lib": ["ES2020"],                        
     "strict": true,
     "baseUrl": "./",
-    "outDir": "temp",
+    "outDir": "dist",   
     "esModuleInterop": true,                 
     "skipLibCheck": true,                     
     "forceConsistentCasingInFileNames": true,
@@ -21,7 +21,8 @@
   "include": [
     "src/**/*.ts",
     "api/**/*.ts",
-    "config.ts"
+    "config.ts",
+    "api/**/*.ts"   
   ],
   "exclude": [
     "spec",

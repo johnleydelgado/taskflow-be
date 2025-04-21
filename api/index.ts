@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable max-len */
 import 'dotenv/config';
 import server from '../src/server';
 import { connectDB } from '../src/db';
-import { Request, ParamsDictionary, Response } from 'express-serve-static-core';
-import { IncomingMessage, ServerResponse } from 'http';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-// Ensure DB is connected once per cold start
 let connected = false;
-export default async function handler(req: Request | IncomingMessage, res: Response | ServerResponse) {
+
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse,
+) {
   if (!connected) {
-    await connectDB();
+    await connectDB();       // ensure DB is ready
     connected = true;
   }
+  // hand off to your Express “server” instance
   return server(req, res);
 }

@@ -78,14 +78,19 @@ const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 
 // Nav to users pg by default
-app.get('/', (_: Request, res: Response) => {
-  return res.redirect('/users');
+// app.get('/', (_: Request, res: Response) => {
+//   return res.redirect('/users');
+// });
+
+// public health‑check endpoint
+app.get('/health-check', (req: express.Request, res: express.Response) => {
+  res.status(200).send('OK');
 });
 
-// Redirect to login if not logged in.
-app.get('/users', (_: Request, res: Response) => {
-  return res.sendFile('users.html', { root: viewsDir });
-});
+// // Redirect to login if not logged in.
+// app.get('/users', (_: Request, res: Response) => {
+//   return res.sendFile('users.html', { root: viewsDir });
+// });
 
 
 /******************************************************************************

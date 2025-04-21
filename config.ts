@@ -1,5 +1,5 @@
 /* eslint-disable n/no-process-env */
-
+// config.ts
 import path from 'path';
 import dotenv from 'dotenv';
 import moduleAlias from 'module-alias';

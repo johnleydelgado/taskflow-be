@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",
-    "moduleResolution": "node",
     "lib": ["ES2020"],                        
     "strict": true,
     "baseUrl": "./",
@@ -19,12 +18,12 @@
   },
   "include": [
     "src/**/*.ts",
-    "config.ts",
-    "scripts/**/*.ts"
+    "config.ts"
   ],
   "exclude": [
     "spec",
     "src/public/",
+    "scripts",
     "eslint.config.ts"
   ]
 }

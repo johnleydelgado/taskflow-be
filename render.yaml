@@ -1,50 +1,10 @@
 # render.yaml
 services:
   - type: web
-    name: task‑approver‑api
+    name: task-approver-api
     env: node
     plan: free
     region: singapore
     branch: main
     buildCommand: npm install && npm run build
     startCommand: npm run start
-
-    envVars:
-      - key: MONGO_URI
-        fromSecret: MONGO_URI
-      - key: MONGO_DB_NAME
-        fromSecret: MONGO_DB_NAME
-      - key: EMAIL_HOST
-        fromSecret: EMAIL_HOST
-      - key: EMAIL_PORT
-        fromSecret: EMAIL_PORT
-      - key: EMAIL_SECURE
-        fromSecret: EMAIL_SECURE
-      - key: EMAIL_USER
-        fromSecret: EMAIL_USER
-      - key: EMAIL_PASS
-        fromSecret: EMAIL_PASS
-      - key: EMAIL_FROM
-        fromSecret: EMAIL_FROM
-      - key: JWT_SECRET
-        fromSecret: JWT_SECRET
-      - key: JWT_EXPIRES_IN
-        fromSecret: JWT_EXPIRES_IN
-      - key: NODE_ENV
-        fromSecret: NODE_ENV
-      - key: APP_URL
-        fromSecret: APP_URL
-
-secrets:
-  - name: MONGO_URI
-  - name: MONGO_DB_NAME
-  - name: EMAIL_HOST
-  - name: EMAIL_PORT
-  - name: EMAIL_SECURE
-  - name: EMAIL_USER
-  - name: EMAIL_PASS
-  - name: EMAIL_FROM
-  - name: JWT_SECRET
-  - name: JWT_EXPIRES_IN
-  - name: NODE_ENV
-  - name: APP_URL

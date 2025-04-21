@@ -25,7 +25,7 @@
     "spec/**/*.ts",
     "config.ts",
     "scripts",
-    "eslint.config.ts"
+    "api/**/*.ts"
   ],
   "exclude": [
     "src/public/*"

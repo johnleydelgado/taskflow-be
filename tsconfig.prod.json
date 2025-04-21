@@ -14,10 +14,13 @@
     },
     "useUnknownInCatchVariables": false,
     "sourceMap": false,
-    "removeComments": true
+    "removeComments": true,
+    "types": [],
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": [
     "src/**/*.ts",
+    "api/**/*.ts",
     "config.ts"
   ],
   "exclude": [

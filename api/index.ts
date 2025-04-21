@@ -1,19 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-import 'dotenv/config';
-import server from '../src/server';
-import { connectDB } from '../src/db';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import express from 'express';
+const app = express();
 
-let connected = false;
+app.get('/', (req: express.Request, res: express.Response) =>
+{
+  res.send('Express on Vercel');
+},
+);
 
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse,
-) {
-  if (!connected) {
-    await connectDB();       // ensure DB is ready
-    connected = true;
-  }
-  // hand off to your Express “server” instance
-  return server(req, res);
-}
+app.listen(3000, () => console.log('Server ready on port 3000.'));
+
+module.exports = app;

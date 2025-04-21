@@ -19,6 +19,9 @@
       "tsconfig-paths/register",
       "./config.ts"
     ],
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "src/**/*.ts",

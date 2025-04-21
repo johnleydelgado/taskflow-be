@@ -1,6 +1,6 @@
 // src/middleware/staticTokenAuth.ts
 import { RequestHandler } from 'express';
-import ENV from 'src/constants/ENV';
+import ENV from '@src/constants/ENV';
 
 export const staticTokenAuth: RequestHandler = (req, res, next) => {
   const auth = req.headers.authorization;

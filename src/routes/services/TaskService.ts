@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
  
  
-import { TaskDoc, TaskModel } from 'src/models/Tasks';
+import { TaskDoc, TaskModel } from '@src/models/Tasks';
 import { v4 as uuid } from 'uuid';
 
 export async function createTask(data: {

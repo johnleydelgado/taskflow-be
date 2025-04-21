@@ -70,12 +70,12 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 // **** FrontEnd Content **** //
 
 // Set views directory (html)
-const viewsDir = path.join(__dirname, 'views');
-app.set('views', viewsDir);
+// const viewsDir = path.join(__dirname, 'views');
+// app.set('views', viewsDir);
 
 // Set static directory (js and css).
-const staticDir = path.join(__dirname, 'public');
-app.use(express.static(staticDir));
+// const staticDir = path.join(__dirname, 'public');
+// app.use(express.static(staticDir));
 
 // Nav to users pg by default
 app.get('/', (_: Request, res: Response) => {
@@ -83,9 +83,9 @@ app.get('/', (_: Request, res: Response) => {
 });
 
 // Redirect to login if not logged in.
-app.get('/users', (_: Request, res: Response) => {
-  return res.sendFile('users.html', { root: viewsDir });
-});
+// app.get('/users', (_: Request, res: Response) => {
+//   return res.sendFile('users.html', { root: viewsDir });
+// });
 
 
 /******************************************************************************

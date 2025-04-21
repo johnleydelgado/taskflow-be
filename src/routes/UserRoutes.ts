@@ -3,8 +3,8 @@
 // src/routes/UserRoutes.ts
 import { Request, Response, NextFunction } from 'express';
 import UserService from './services/UserService';
-import { IUser } from 'src/models/User';
-import HttpStatusCodes from 'src/constants/HttpStatusCodes';
+import { IUser } from '@src/models/User';
+import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
 /** Get all users */
 export async function getAll(_req: Request, res: Response, next: NextFunction) {

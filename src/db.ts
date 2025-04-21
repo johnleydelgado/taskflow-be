@@ -1,4 +1,3 @@
-// src/db.ts
 import mongoose from 'mongoose';
 import ENV from './constants/ENV';
 

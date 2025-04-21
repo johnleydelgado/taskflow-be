@@ -12,10 +12,10 @@ import {
   getTaskStatusByToken,
   findTaskByToken,
 } from './services/TaskService';
-import { sendEmail } from 'src/util/mailer';
-import ENV from 'src/constants/ENV';
-import { taskApprovalTemplate } from 'src/util/emailTemplates';
-import HttpStatusCodes from 'src/constants/HttpStatusCodes';
+import ENV from '@src/constants/ENV';
+import { sendEmail } from '@src/util/mailer';
+import { taskApprovalTemplate } from '@src/util/emailTemplates';
+import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 
 
 /**

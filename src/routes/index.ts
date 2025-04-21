@@ -3,8 +3,8 @@ import { Router } from 'express';
 
 import UserRoutes from './UserRoutes';
 import { checkTokenValidity, createAndEmail, deleteTaskData, fetchTaskStatus, getAllTasksData, updateTaskData  , respond, fetchTaskByToken } from './TaskRoutesHandlers';
-import { staticTokenAuth } from 'src/middleware/staticTokenAuth';
-import Paths from 'src/constants/Paths';
+import { staticTokenAuth } from '@src/middleware/staticTokenAuth';
+import Paths from '@src/constants/Paths';
 
 
 /******************************************************************************

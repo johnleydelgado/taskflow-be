@@ -1,8 +1,8 @@
 // src/services/UserService.ts
 import { Types } from 'mongoose';
-import { UserModel, UserDoc } from '@src/models/User';
-import ENV from '@src/constants/ENV';
 import jwt from 'jsonwebtoken';
+import { UserDoc, UserModel } from 'src/models/User';
+import ENV from 'src/constants/ENV';
 const UserService = {
   async getAll(): Promise<UserDoc[]> {
     return UserModel.find().exec();

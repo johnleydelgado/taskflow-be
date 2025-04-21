@@ -1,5 +1,5 @@
-import ENV from '@src/constants/ENV';
 import nodemailer from 'nodemailer';
+import ENV from 'src/constants/ENV';
 const transporter = nodemailer.createTransport({
   host:     ENV.EmailHost,      
   port:     ENV.EmailPort,       

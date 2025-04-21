@@ -6,15 +6,15 @@ import logger from 'jet-logger';
 import cors from 'cors';
 import 'express-async-errors';
 
-import BaseRouter from '@src/routes';
 
-import Paths from '@src/constants/Paths';
-import ENV from '@src/constants/ENV';
-import HttpStatusCodes from '@src/constants/HttpStatusCodes';
-import { RouteError } from '@src/util/route-errors';
-import { NodeEnvs } from '@src/constants';
+
 import { errorHandler } from './util/errorHandler';
-
+import ENV from './constants/ENV';
+import { NodeEnvs } from './constants';
+import Paths from './constants/Paths';
+import HttpStatusCodes from './constants/HttpStatusCodes';
+import { RouteError } from './util/route-errors';
+import BaseRouter from './routes/index';
 
 /******************************************************************************
                                 Setup

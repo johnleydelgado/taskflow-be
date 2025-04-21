@@ -1,6 +1,6 @@
 // src/db.ts
 import mongoose from 'mongoose';
-import ENV from '@src/constants/ENV';
+import ENV from './constants/ENV';
 
 export async function connectDB() {
   if (!ENV.MongoUri)   throw new Error('Missing MONGO_URI');

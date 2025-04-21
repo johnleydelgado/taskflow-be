@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import logger from 'jet-logger';
-import ENV from '@src/constants/ENV';
 import server from './server';
 import { connectDB } from './db';
+import ENV from './constants/ENV';
 
 (async () => {
   try {

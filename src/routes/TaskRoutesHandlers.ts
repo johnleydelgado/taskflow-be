@@ -2,7 +2,6 @@
 /* eslint-disable max-len */
 // src/routes/TaskRoutesHandlers.ts
 import { Request, Response, NextFunction } from 'express';
-import HttpStatusCodes from '@src/constants/HttpStatusCodes';
 import {
   createTask,
   getAllTasks,
@@ -13,9 +12,11 @@ import {
   getTaskStatusByToken,
   findTaskByToken,
 } from './services/TaskService';
-import { sendEmail } from '@src/util/mailer';
-import { taskApprovalTemplate } from '@src/util/emailTemplates';
-import ENV from '@src/constants/ENV';
+import { sendEmail } from 'src/util/mailer';
+import ENV from 'src/constants/ENV';
+import { taskApprovalTemplate } from 'src/util/emailTemplates';
+import HttpStatusCodes from 'src/constants/HttpStatusCodes';
+
 
 /**
  * POST /api/tasks/

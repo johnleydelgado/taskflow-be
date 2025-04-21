@@ -7,4 +7,4 @@ services:
     region: singapore
     branch: main
     buildCommand: npm install && npm run build
-    startCommand: npm run start
+    startCommand: NODE_ENV=production npm run start

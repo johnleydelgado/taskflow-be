@@ -4,7 +4,10 @@
       {
         "src": "package.json",
         "use": "@vercel/static-build",
-        "config": { "distDir": "dist" }
+        "config": {
+          "buildCommand": "node -r ts-node/register ./scripts/build.ts",
+          "distDir": "dist"
+        }
       },
       {
         "src": "dist/api/index.js",

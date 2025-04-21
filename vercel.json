@@ -2,7 +2,6 @@
     "version": 2,
     "routes": [
       { "src": "/(.*)", "dest": "/api/index.ts" }
-    ],
-    "outputDirectory": null
+    ]
 }
   

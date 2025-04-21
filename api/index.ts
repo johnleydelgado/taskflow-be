@@ -14,6 +14,5 @@ export default async function handler(
     await connectDB();       // ensure DB is ready
     connected = true;
   }
-  // hand off to your Express “server” instance
   return server(req, res);
 }

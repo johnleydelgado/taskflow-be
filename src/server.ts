@@ -26,7 +26,7 @@ const app = express();
 const corsOptions = {
   origin: ENV.NodeEnv === NodeEnvs.Dev
     ? 'http://localhost:5173'      // where your React app runs
-    : ['https://task-approver-api.onrender.com','https://taskflow-d6mdfamqh-leydelgados-projects.vercel.app'],
+    : ['https://task-approver-api.onrender.com','https://taskflow-d6mdfamqh-leydelgados-projects.vercel.app' , 'https://taskflow-hmwcq4ad9-leydelgados-projects.vercel.app'],
   credentials: true,               // allow cookies/Authorization headers
 };
 app.use(cors(corsOptions));

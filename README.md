@@ -1,65 +1,118 @@
-## About
+# Task Flow Backend
 
-This project was created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
+A lightweight Node.js & TypeScript backend for the Link-Based Task Approval App technical assessment. This Express server implements the API routes, email workflows, and token-management required for a manager to create tasks, send approval emails, and process user responses via secure, single-use links.
 
-**IMPORTANT** for demo purposes I had to disable `helmet` in production. In any real world app you should change these 3 lines of code in `src/server.ts`:
-```ts
-// eslint-disable-next-line n/no-process-env
-if (!process.env.DISABLE_HELMET) {
-  app.use(helmet());
-}
+---
+
+## Project Details
+
+- **Name:** TaskFlow
+- **Version:** 0.0.0  
+- **Description:** API server for task creation, assignment, tokenized link generation, email delivery, and response handling.
+
+## Tech Stack
+
+- **Runtime:** Node.js (>=16.0.0)  
+- **Language:** TypeScript  
+- **Framework:** Express.js  
+- **Database:** MongoDB via Mongoose  
+- **Authentication & Security:** JSON Web Tokens (jsonwebtoken), bcrypt (password hashing), helmet, cors  
+- **Email Service:** nodemailer  
+- **Utilities:** dotenv, dayjs, uuid, express-async-errors  
+- **Logging & Validation:** jet-logger, jet-validators, morgan, module-alias
+
+## Prerequisites
+
+- **Node.js** v16+  
+- **npm** (bundled with Node.js)  
+- **MongoDB** instance (local or hosted)
+
+## Installation
+
+```bash
+git clone https://github.com/johnleydelgado/taskflow-be.git
+cd taskflow-be
+npm install
 ```
 
-To just this:
-```ts
-app.use(helmet());
+## Environment Variables
+
+> You will receive a `.env` file containing all necessary configuration values (database URI, JWT secret, email credentials, etc.).  
+> Place it in the project root before running any scripts.
+
+Example `.env` contents:
+```
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/taskflow
+JWT_SECRET=your_jwt_secret
+EMAIL_HOST=smtp.example.com
+EMAIL_PORT=587
+EMAIL_USER=your_email_user
+EMAIL_PASS=your_email_password
 ```
 
+## Postman Collection
+
+> A Postman collection (`Task Flow API.postman_collection.json`) will be provided.  
+> Import it to explore and test all available endpoints (task CRUD, email send, token response, authentication, etc.).
 
 ## Available Scripts
 
-### `npm run clean-install`
+- **`npm run dev`**  
+  Launch the server in development mode (`NODE_ENV=development`) using `ts-node`.
 
-Remove the existing `node_modules/` folder, `package-lock.json`, and reinstall all library modules.
+- **`npm run dev:hot`**  
+  Same as `dev` but with `nodemon` for hot-reloading on code changes.
 
+- **`npm run build`**  
+  Compile TypeScript sources to JavaScript under `./dist` using the custom build script.
 
-### `npm run dev` or `npm run dev:hot` (hot reloading)
+- **`npm run start`**  
+  Run the compiled server in production mode (`NODE_ENV=production`).
 
-Run the server in development mode.<br/>
+- **`npm run test`**  
+  Execute Jasmine tests (`NODE_ENV=test`) with `ts-node`.
 
-**IMPORTANT** development mode uses `swc` for performance reasons which DOES NOT check for typescript errors. Run `npm run type-check` to check for type errors. NOTE: you should use your IDE to prevent most type errors.
+- **`npm run test:hot`**  
+  Watch and re-run tests on file changes via `nodemon`.
 
+- **`npm run lint`**  
+  Run ESLint for code quality.
 
-### `npm test` or `npm run test:hot` (hot reloading)
+- **`npm run type-check`**  
+  Run the TypeScript compiler (`tsc --noEmit`) to check types.
 
-Run all unit-tests.
+- **`npm run clean-install`**  
+  Clear `node_modules` and reinstall dependencies from scratch.
 
+## API Endpoints
 
-### `npm test -- "name of test file" (i.e. users).`
+All routes are prefixed with `/api`.
 
-Run a single unit-test.
+### User Routes (Protected)
+- **GET** `/api/users/all` — Fetch all users.
+- **POST** `/api/users/add` — Create a new user.
+- **PUT** `/api/users/update/:id` — Update an existing user.
+- **DELETE** `/api/users/delete/:id` — Delete a user.
+- **POST** `/api/users/login` — Authenticate and receive a JWT (sets an HTTP‑only cookie).
 
+### Task Routes (Protected)
+- **POST** `/api/tasks/email-creation` — Create a task and send approval emails.
+- **GET** `/api/tasks/all` — List all tasks with their statuses.
+- **PUT** `/api/tasks/update/:id` — Update task details.
+- **DELETE** `/api/tasks/delete/:id` — Delete a task.
+- **PUT** `/api/tasks/task-respond/:token` — Approve or reject a task (request body: `{ token, action }`).
+- **GET** `/api/tasks/token-valid/:token` — Check if a task token is valid.
+- **GET** `/api/tasks/status/:token` — Get the current status (`pending`/`approved`/`rejected`) of a task by token.
+- **GET** `/api/tasks/:token` — Fetch detailed task data by token.
 
-### `npm run lint`
+## Security Considerations
 
-Check for linting errors.
+- All tokens are single-use and expire after first use or a configurable time window (via `dayjs`).  
+- Passwords (if applicable) are hashed with `bcrypt` before storage.  
+- CORS and HTTP headers are hardened with `cors` and `helmet`.
 
+## License
 
-### `npm run build`
+MIT © Johnley Delgado
 
-Build the project for production.
-
-
-### `npm start`
-
-Run the production build (Must be built first).
-
-
-### `npm run type-check`
-
-Check for typescript errors.
-
-
-## Additional Notes
-
-- If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`. 

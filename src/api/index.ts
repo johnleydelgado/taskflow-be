@@ -1,17 +1,16 @@
-/* eslint-disable n/no-extraneous-import */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
- 
 import 'dotenv/config';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import server from '../server';
-import { connectDB } from '../db';
+import logger from 'jet-logger';
+import ENV from 'src/constants/ENV';
+import { connectDB } from 'src/db';
+import server from 'src/server';
 
-let dbConnected = false;
-
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (!dbConnected) {
-    await connectDB();       // init your Mongo once per cold start
-    dbConnected = true;
+(async () => {
+  try {
+    await connectDB();                  // block until Mongo is ready
+    server.listen(ENV.Port, () =>
+      logger.info(`Express server started on port ${ENV.Port}`),
+    );
+  } catch (err) {
+    throw new Error(`❌  Failed to start server: ${err}`);
   }
-  return server(req, res);  // hand off to your Express app
-}
+})();
